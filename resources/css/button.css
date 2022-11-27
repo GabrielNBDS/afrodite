@@ -1,6 +1,6 @@
 /* base */
 .btn {
-  @apply px-4 text-white font-medium rounded-md active:translate-y-[1px] text-sm block h-9 border border-transparent;
+  @apply px-4 flex items-center text-white font-medium rounded-md active:translate-y-[1px] text-sm h-9 border border-transparent;
 }
 
 /* rounded */
