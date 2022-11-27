@@ -61,8 +61,10 @@
     "@adonisjs/shield": "^7.0.11",
     "@adonisjs/view": "^6.1.6",
     "@hotwired/turbo": "^7.2.4",
+    "@iconify-json/heroicons": "^1.1.6",
     "@softwarecitadel/adonisjs-girouette": "^0.0.2",
     "alpinejs": "^3.10.3",
+    "edge-iconify": "^1.0.1",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.21"
