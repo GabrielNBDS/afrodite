@@ -1,0 +1,17 @@
+
+<{{ component || 'button' }}
+  {{ $props.serializeExcept(['label', 'className', 'component']) }}
+  class="{{
+    [
+      'btn',
+      color ? `btn-${color}` : 'btn-blue',
+      rounded ? `btn-rounded-${rounded}` : '',
+      size ? `btn-size-${size}` : '',
+      compact ? 'btn-compact' : '',
+      light ? 'light' : '',
+      className || ''
+    ].join(' ').trim()
+  }}"
+>
+  {{ label }}
+</{{ component || 'button' }}>

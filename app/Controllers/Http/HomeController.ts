@@ -6,4 +6,9 @@ export default class HomeController {
   public async index({ view }: HttpContextContract) {
     return view.render('pages/home')
   }
+
+  @Get('/button', 'Home.button')
+  public async button({ view }: HttpContextContract) {
+    return view.render('pages/button')
+  }
 }
