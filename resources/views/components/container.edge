@@ -1,0 +1,11 @@
+@set("px", px || "px-4")
+@set("maxW", maxW || "max-w-screen-lg")
+@set('component', component || 'div')
+@set('childClasses', childClasses || "")
+@set('parentClasses', parentClasses || "")
+
+<{{ component }} class="w-full {{ px }} {{ parentClasses }}">
+  <div class="mx-auto {{ maxW }} {{ childClasses }}">
+    {{{ await $slots.main() }}}
+  </div>
+</{{ component }}>

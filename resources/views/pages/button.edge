@@ -1,0 +1,99 @@
+@layout('layouts/main')
+@set('title', 'Button | Afrodite')
+
+@section('body')
+  @include('partials/header')
+
+  @component('components/container', { parentClasses: 'py-8'})
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-800 md:text-4xl">Button</h1>
+      <h2 class="text-gray-6">
+        Button component
+      </h2>
+    </div>
+
+    <div
+      x-data="{ color: 'blue', size: 'md', radius: 'md', variant: 'filled' }"
+      x-init="
+        $watch('color', (value, oldValue) => {
+          const btn = document.querySelector('#exampleButton')
+
+          btn.classList.remove(`btn-${oldValue}`)
+          btn.classList.add(`btn-${value}`)
+        })
+
+        $watch('size', (value, oldValue) => {
+          const btn = document.querySelector('#exampleButton')
+
+          btn.classList.remove(`btn-size-${oldValue}`)
+          if(value !== 'md') btn.classList.add(`btn-size-${value}`)
+        })
+
+        $watch('radius', (value, oldValue) => {
+          const btn = document.querySelector('#exampleButton')
+
+          btn.classList.remove(`btn-rounded-${oldValue}`)
+          if(value !== 'md') btn.classList.add(`btn-rounded-${value}`)
+        })
+
+        $watch('variant', (value, oldValue) => {
+          const btn = document.querySelector('#exampleButton')
+
+          btn.classList.remove(`btn-${oldValue}`)
+          if(value !== 'filled') btn.classList.add(`btn-${value}`)
+        })
+      "
+    >
+      <div class="flex flex-col md:flex-row w-full border border-gray-3 ">
+        <div class="flex flex-1 p-4 items-center justify-center">
+          @!button({ label: 'Settings', id: 'exampleButton' })
+        </div>
+        <div class="w-full border-l border-gray-3 flex flex-col gap-5 md:w-[250px] px-2 py-4">
+          <div class="flex flex-col self-start gap-2 w-full">
+            <p>Variant:</p>
+
+            @!form.select({ name: 'variant', checked: 'filled', items: [
+              { label: 'Filled', value: 'filled' },
+              { label: 'Light', value: 'light' },
+              { label: 'Outline', value: 'outline' },
+              { label: 'Subtle', value: 'subtle' },
+            ]})
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <p>Color:</p>
+            @include('partials/ColorPicker')
+          </div>
+
+          <div class="flex flex-col self-start gap-2">
+            <p>Size:</p>
+            <div class="flex flex-col">
+              @!form.radio({ name: 'size', checked: 'md', items: [
+                { label: 'sm', value: 'sm' },
+                { label: 'md', value: 'md' },
+                { label: 'lg', value: 'lg' },
+                { label: 'xl', value: 'xl' },
+              ]})
+            </div>
+          </div>
+
+          <div class="flex flex-col self-start gap-2">
+            <p>Radius:</p>
+            <div class="flex flex-col">
+              @!form.radio({ name: 'radius', checked: 'md', items: [
+                { label: 'none', value: 'none' },
+                { label: 'sm', value: 'sm' },
+                { label: 'md', value: 'md' },
+                { label: 'lg', value: 'lg' },
+                { label: 'full', value: 'full' },
+              ]})
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  @end
+
+
+@end
+

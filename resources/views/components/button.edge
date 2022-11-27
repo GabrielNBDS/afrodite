@@ -1,4 +1,6 @@
-<{{ component || 'button' }}
+@set('component', component || 'button')
+
+<{{ component }}
   {{ $props.serializeExcept(['label', 'className', 'component']) }}
   class="{{
     [
@@ -13,4 +15,4 @@
   }}"
 >
   {{ label }}
-</{{ component || 'button' }}>
+</{{ component }}>

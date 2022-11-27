@@ -1,22 +1,25 @@
 <div x-data="{ isOpen: false }">
-  <header class="w-full border-b border-gray-1 px-4">
-    <div class="h-16 flex items-center max-w-screen-lg mx-auto justify-between">
-      <a href="/" class="flex items-center">
-        @svg('heroicons:heart-solid', { class: 'w-9 h-9 text-red-7', size: 'none' })
-        <p class="text-2xl font-bold">Afrodite</p>
-      </a>
+  @component('components/container', {
+    component: 'header',
+    parentClasses: 'border-b border-gray-1',
+    childClasses: 'h-16 flex items-center justify-between'
+  })
+    <a href="/" class="flex items-center">
+      @svg('heroicons:heart-solid', { class: 'w-9 h-9 text-red-7', size: 'none' })
+      <p class="text-2xl font-bold">Aphrodite</p>
+    </a>
 
-      <div class="items-center gap-2 hidden sm:flex">
-        @!button({ component: 'a', href: '/#primitives', variant: 'light', label: 'Primitives', color: 'red' })
-        @!button({ component: 'a', href: '/#composed', variant: 'light', label: 'Composed', color: 'red' })
-        @!button({ component: 'a', href: '/#page-states', variant: 'light', label: 'Page States', color: 'red' })
-      </div>
-
-      <button @click="isOpen = !isOpen" class="w-7 h-7 text-gray-7 sm:hidden cursor-pointer">
-        @svg('heroicons:bars-3-20-solid', { size: 'none' })
-      </button>
+    <div class="items-center gap-2 hidden sm:flex">
+      @!button({ component: 'a', href: '/#primitives', variant: 'light', label: 'Primitives', color: 'red' })
+      @!button({ component: 'a', href: '/#composed', variant: 'light', label: 'Composed', color: 'red' })
+      @!button({ component: 'a', href: '/#page-states', variant: 'light', label: 'Page States', color: 'red' })
     </div>
-  </header>
+
+    <button @click="isOpen = !isOpen" class="w-7 h-7 text-gray-7 sm:hidden cursor-pointer">
+      @svg('heroicons:bars-3-20-solid', { size: 'none' })
+    </button>
+  @end
+
   <nav class="bg-white z-50 fixed w-full h-[calc(100vh-64px)] sm:hidden" :class="isOpen ? 'block' : 'hidden'">
     <ul class="items-center gap-2 flex flex-col p-4">
       <li class="w-full">
