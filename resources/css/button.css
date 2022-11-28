@@ -1,6 +1,6 @@
 /* base */
 .btn {
-  @apply px-4 flex items-center text-white font-medium rounded-md active:translate-y-[1px] text-sm h-9 border border-transparent;
+  @apply px-4 flex items-center transition-colors text-white font-medium rounded-md active:translate-y-[1px] text-sm h-9 border border-transparent;
 }
 
 /* rounded */
@@ -265,4 +265,8 @@
 
 .btn-orange.btn-subtle {
   @apply bg-transparent hover:bg-orange-1 text-orange-9
+}
+
+.btn.btn-disabled {
+  @apply cursor-default bg-gray-3 text-gray-6 hover:bg-gray-3 active:translate-y-0 border-none
 }

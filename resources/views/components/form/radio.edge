@@ -5,7 +5,7 @@
       id="{{ item.value }}-{{ name }}"
       name="{{ name }}"
       value="{{ item.value }}"
-      x-model="{{ name }}"
+      {{ item.value === checked ? 'checked' : '' }}
     />
 
     <label for="{{ item.value }}-{{ name }}">{{ item.label }}</label>

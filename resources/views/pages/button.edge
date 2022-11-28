@@ -1,5 +1,5 @@
 @layout('layouts/main')
-@set('title', 'Button | Afrodite')
+@set('title', 'Button | Aprhodite')
 
 @section('body')
   @include('partials/header')
@@ -10,49 +10,26 @@
       <h2 class="text-gray-6">
         Button component
       </h2>
+
+      <p class="text-gray-6 mt-4">
+        You can also pass <code>{ component: 'a', href: '/' }</code> to change it to a anchor.
+      </p>
+
+      <p class="text-gray-6">
+        To add icons to it use you can pass <code>{ leftIcon: 'heroicons:power' }</code> or <code>{ rightIcon: 'heroicons:power' }</code>
+      </p>
     </div>
 
-    <div
-      x-data="{ color: 'blue', size: 'md', radius: 'md', variant: 'filled' }"
-      x-init="
-        $watch('color', (value, oldValue) => {
-          const btn = document.querySelector('#exampleButton')
-
-          btn.classList.remove(`btn-${oldValue}`)
-          btn.classList.add(`btn-${value}`)
-        })
-
-        $watch('size', (value, oldValue) => {
-          const btn = document.querySelector('#exampleButton')
-
-          btn.classList.remove(`btn-size-${oldValue}`)
-          if(value !== 'md') btn.classList.add(`btn-size-${value}`)
-        })
-
-        $watch('radius', (value, oldValue) => {
-          const btn = document.querySelector('#exampleButton')
-
-          btn.classList.remove(`btn-rounded-${oldValue}`)
-          if(value !== 'md') btn.classList.add(`btn-rounded-${value}`)
-        })
-
-        $watch('variant', (value, oldValue) => {
-          const btn = document.querySelector('#exampleButton')
-
-          btn.classList.remove(`btn-${oldValue}`)
-          if(value !== 'filled') btn.classList.add(`btn-${value}`)
-        })
-      "
-    >
+    <div>
       <div class="flex flex-col md:flex-row w-full border border-gray-3 ">
         <div class="flex flex-1 p-4 items-center justify-center">
           @!button({ label: 'Settings', id: 'exampleButton' })
         </div>
-        <div class="w-full border-l border-gray-3 flex flex-col gap-5 md:w-[250px] px-2 py-4">
+        <form id="form" class="w-full border-l border-gray-3 flex flex-col gap-5 md:w-[250px] px-2 py-4">
           <div class="flex flex-col self-start gap-2 w-full">
             <p>Variant:</p>
 
-            @!form.select({ name: 'variant', checked: 'filled', items: [
+            @!form.select({ name: 'variant', selected: 'filled', id: 'variant', items: [
               { label: 'Filled', value: 'filled' },
               { label: 'Light', value: 'light' },
               { label: 'Outline', value: 'outline' },
@@ -89,11 +66,56 @@
               ]})
             </div>
           </div>
-        </div>
+
+          <label for="disabled" class="flex self-start items-center gap-2 select-none">
+            <input type="checkbox" name="disabled" id="disabled">
+            Disabled
+          </label>
+        </form>
+      </div>
+      <div class="border p-4 border-gray-3 border-t-0 bg-gray-1 flex flex-col">
+        <code id="codeSample">@a.button({ label: 'Settings' })</code>
       </div>
     </div>
+
+    <script>
+      var btn = document.querySelector('#exampleButton')
+      var codeSample = document.querySelector('#codeSample')
+
+      var form = document.querySelector('#form')
+      var variantSelect = document.querySelector('#variant')
+      var disabledCheckbox = document.querySelector('#disabled')
+
+      form.addEventListener('change', () => {
+        const variant = variantSelect.value
+        const disabled = disabledCheckbox.checked
+        const color = document.querySelector('input[name="color"]:checked').value
+        const size = document.querySelector('input[name="size"]:checked').value
+        const radius = document.querySelector('input[name="radius"]:checked').value
+
+        btn.className = 'btn'
+        btn.disabled = false
+
+        btn.classList.add(`btn-${variant}`)
+        btn.classList.add(`btn-${color}`)
+        btn.classList.add(`btn-size-${size}`)
+        btn.classList.add(`btn-rounded-${radius}`)
+
+        const modifiers = ["label: 'Settings'"]
+
+        if(variant !== 'filled') modifiers.push(`variant: '${variant}'`)
+        if(color !== 'blue') modifiers.push(`color: '${color}'`)
+        if(size !== 'md') modifiers.push(`size: '${size}'`)
+        if(radius !== 'md') modifiers.push(`rounded: '${radius}'`)
+        if(disabled) {
+          modifiers.push(`disabled: true`)
+          btn.classList.add('btn-disabled')
+          btn.disabled = true
+        }
+
+        codeSample.innerHTML = `@a.button({ ${modifiers.join(', ')} })`
+      })
+    </script>
   @end
-
-
 @end
 

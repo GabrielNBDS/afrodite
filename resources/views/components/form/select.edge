@@ -1,6 +1,7 @@
-<select class="w-full p-1 border border-gray-3 rounded-md" name="{{ name }}" x-model="{{ name }}">
+<select class="w-full p-1 border border-gray-3 rounded-md" {{ $props.serializeExcept(['value', 'items', 'selected']) }}>
   @each(item in items)
     <option
+      {{ selected === item.value ? 'selected' : ''}}
       value="{{ item.value }}"
     />
       {{ item.value }}

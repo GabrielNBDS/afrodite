@@ -1,18 +1,25 @@
 @set('component', component || 'button')
+@set('iconSize', size === 'sm' ? 4 : size === 'lg' ? 6 : size === 'xl' ? 7 : 5)
 
 <{{ component }}
-  {{ $props.serializeExcept(['label', 'className', 'component']) }}
+  {{ $props.serializeExcept(['label', 'className', 'component', 'size', 'rounded', 'color', 'variant']) }}
   class="{{
     [
       'btn',
       color ? `btn-${color}` : 'btn-blue',
       rounded ? `btn-rounded-${rounded}` : '',
       size ? `btn-size-${size}` : '',
-      compact ? 'btn-compact' : '',
       variant ? `btn-${variant}` : '',
+      disabled ? `btn-disabled` : '',
       className || ''
     ].join(' ').trim()
   }}"
 >
+  @if(leftIcon)
+    @svg(leftIcon, { class: `w-${iconSize} h-${iconSize} mr-1` })
+  @end
   {{ label }}
+  @if(rightIcon)
+    @svg(rightIcon, { class: `w-${iconSize} h-${iconSize} ml-1` })
+  @end
 </{{ component }}>
