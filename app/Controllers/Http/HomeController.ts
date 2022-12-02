@@ -11,4 +11,9 @@ export default class HomeController {
   public async button({ view }: HttpContextContract) {
     return view.render('pages/button')
   }
+
+  @Get('/input', 'Home.input')
+  public async input({ view }: HttpContextContract) {
+    return view.render('pages/input')
+  }
 }

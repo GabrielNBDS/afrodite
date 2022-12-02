@@ -1,0 +1,138 @@
+@layout('layouts/main')
+@set('title', 'Input | Aprhodite')
+
+@section('body')
+  @include('partials/header')
+
+  @component('components/container', { parentClasses: 'py-8'})
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-800 md:text-4xl">Input</h1>
+      <h2 class="text-gray-6">
+        Input component
+      </h2>
+
+      <p class="text-gray-6">
+        To add icons to it use you can pass <code>{ icon: 'heroicons:power' }</code>.
+      </p>
+
+      <p class="text-gray-6">
+        You must also pass a name, for example: <code>{ name: 'email' }</code>
+      </p>
+
+    </div>
+
+    <div>
+      <div class="flex flex-col md:flex-row w-full border border-gray-3 ">
+        <div class="flex flex-1 p-4 items-center justify-center">
+          @component('components/container', { maxW: 'max-w-xs'})
+            @!form.input({ placeholder: 'Email', name: 'exampleInput' })
+          @end
+        </div>
+        <form id="form" class="w-full border-l border-gray-3 flex flex-col gap-5 md:w-[250px] px-2 py-4">
+          <div class="flex flex-col gap-2">
+            <p>Color:</p>
+            @include('partials/ColorPicker')
+          </div>
+
+          <div class="flex flex-col self-start gap-2">
+            <p>Size:</p>
+            <div class="flex flex-col">
+              @!form.radio({ name: 'size', checked: 'md', items: [
+                { label: 'sm', value: 'sm' },
+                { label: 'md', value: 'md' },
+                { label: 'lg', value: 'lg' },
+                { label: 'xl', value: 'xl' },
+              ]})
+            </div>
+          </div>
+
+          <div class="flex flex-col self-start gap-2">
+            <p>Radius:</p>
+            <div class="flex flex-col">
+              @!form.radio({ name: 'radius', checked: 'md', items: [
+                { label: 'none', value: 'none' },
+                { label: 'sm', value: 'sm' },
+                { label: 'md', value: 'md' },
+                { label: 'lg', value: 'lg' },
+                { label: 'full', value: 'full' },
+              ]})
+            </div>
+          </div>
+
+          <label for="disabled" class="flex self-start items-center gap-2 select-none">
+            <input type="checkbox" name="disabled" id="disabled">
+            Disabled
+          </label>
+        </form>
+      </div>
+      <div class="border p-4 border-gray-3 border-t-0 bg-gray-1 flex flex-col">
+        <code id="codeSample">@a.form.input({ placeholder: 'Email', name: 'email', type: 'email' })</code>
+      </div>
+    </div>
+
+    <div class="mt-6">
+      <h2 class="text-lg mb-6">
+        With label:
+      </h2>
+
+      @!form.input({ label: 'Name', name: 'name' })
+      <code class="border p-4 border-gray-3 border-t-0 bg-gray-1 mt-4 flex">@!form.input({ label: 'Name', name: 'name' })</code>
+    </div>
+
+    <div class="mt-6">
+      <h2 class="text-lg mb-8">
+        With error:
+      </h2>
+
+      @!form.input({ label: 'Password', name: 'password', type: 'password' })
+      <p class="text-red-6 text-sm mt-1" role="alert">
+        Password should be at least 8 characters long.
+      </p>
+      <code class="border p-4 border-gray-3 border-t-0 bg-gray-1 mt-4 flex">@!form.input({ label: 'Password', name: 'password', type: 'password' })</code>
+
+      <p class="text-gray-6 mt-2">The error message is taken from <code>flashMessages.get(`errors.${field}`)</code>. It is the default path for Adonis's validator.</p>
+    </div>
+
+
+    <script>
+      var input = document.querySelector('#exampleInput')
+      var codeSample = document.querySelector('#codeSample')
+
+      var form = document.querySelector('#form')
+      var disabledCheckbox = document.querySelector('#disabled')
+
+      form.addEventListener('change', () => {
+        const disabled = disabledCheckbox.checked
+        const color = document.querySelector('input[name="color"]:checked').value
+        const size = document.querySelector('input[name="size"]:checked').value
+        const radius = document.querySelector('input[name="radius"]:checked').value
+
+        input.className = 'input'
+        input.disabled = false
+
+        input.classList.add(`input-${color}`)
+        input.classList.add(`input-size-${size}`)
+        input.classList.add(`input-rounded-${radius}`)
+
+        const modifiers = ["placeholder: 'email'", "name: 'email'", "type: 'email'"]
+
+        if(color !== 'blue') modifiers.push(`color: '${color}'`)
+        if(size !== 'md') modifiers.push(`size: '${size}'`)
+        if(radius !== 'md') modifiers.push(`rounded: '${radius}'`)
+        if(disabled) {
+          modifiers.push(`disabled: true`)
+          input.classList.add('input-disabled')
+          input.disabled = true
+        }
+
+        if(modifiers.length < 1) {
+          codeSample.innerHTML = '@a.form.input()'
+          return
+        }
+
+        codeSample.innerHTML = `@a.form.input({ ${modifiers.join(', ')} })`
+      })
+    </script>
+  @end
+@end
+

@@ -1,0 +1,98 @@
+.label {
+  @apply block text-sm font-medium text-gray-9
+}
+
+.input {
+  @apply w-full px-3 h-9 text-sm border border-gray-4 rounded focus:outline-blue-7 flex
+}
+
+/* rounded */
+
+.input-rounded-none {
+  @apply rounded-none
+}
+
+.input-rounded-sm {
+  @apply rounded
+}
+
+.input-rounded-lg {
+  @apply rounded-lg
+}
+
+.input-rounded-full {
+  @apply rounded-full
+}
+
+/* size */
+
+.input-size-sm {
+  @apply text-xs h-8
+}
+
+.input-size-lg {
+  @apply text-base h-10
+}
+
+.input-size-xl {
+  @apply text-lg h-12
+}
+
+
+/* Colors */
+
+.input-dark {
+  @apply focus:outline-dark-9
+}
+
+.input-gray {
+  @apply focus:outline-gray-7
+}
+
+.input-red {
+  @apply focus:outline-red-7
+}
+
+.input-pink {
+  @apply focus:outline-pink-6
+}
+
+.input-grape {
+  @apply focus:outline-grape-6
+}
+
+.input-violet {
+  @apply focus:outline-violet-6
+}
+
+.input-indigo {
+  @apply focus:outline-indigo-7
+}
+
+.input-blue {
+  @apply focus:outline-blue-6
+}
+
+.input-cyan {
+  @apply focus:outline-cyan-6
+}
+
+.input-teal {
+  @apply focus:outline-teal-5
+}
+
+.input-green {
+  @apply focus:outline-green-6
+}
+
+.input-lime {
+  @apply focus:outline-lime-5
+}
+
+.input-yellow {
+  @apply focus:outline-yellow-5
+}
+
+.input-orange {
+  @apply focus:outline-orange-6
+}
